@@ -1,10 +1,10 @@
-package com.rotaslz.rotaslz_api;
+package com.rotaslz.rotaslzapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RotaslzApiApplicationTests {
+class RotaSLZApiApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,13 +1,13 @@
-package com.rotaslz.rotaslz_api;
+package com.rotaslz.rotaslzapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RotaslzApiApplication {
+public class RotaSLZApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RotaslzApiApplication.class, args);
+		SpringApplication.run(RotaSLZApiApplication.class, args);
 	}
 
 }
