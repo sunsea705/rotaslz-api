@@ -1,4 +1,4 @@
-package com.rotaslz.rotaslzapi;
+package com.rotaslzapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

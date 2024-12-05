@@ -1,4 +1,4 @@
-package com.rotaslz.rotaslzapi;
+package com.rotaslzapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
