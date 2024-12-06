@@ -1,12 +1,12 @@
 package com.rotaslzapi.controllers;
 
 import com.rotaslzapi.models.Localidade;
+import com.rotaslzapi.requests.CriarLocalidadeRequest;
 import com.rotaslzapi.services.LocalidadeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +20,11 @@ public class LocalidadeController {
     @GetMapping
     public ResponseEntity<List<Localidade>> findAll() {
         return ResponseEntity.ok(localidadeService.buscarTodos());
+    }
+
+    @PostMapping
+    public ResponseEntity<Localidade> criarLocalidade(@Valid @RequestBody CriarLocalidadeRequest criarLocalidadeRequest) {
+        return ResponseEntity.ok(localidadeService.criarLocalidade(criarLocalidadeRequest));
     }
 
 }
