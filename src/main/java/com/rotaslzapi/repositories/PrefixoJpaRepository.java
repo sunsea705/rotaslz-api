@@ -1,6 +1,6 @@
-package com.rotaslzapi.infrastructure.mariadb.repositories;
+package com.rotaslzapi.repositories;
 
-import com.rotaslzapi.infrastructure.mariadb.entities.Prefixo;
+import com.rotaslzapi.entities.Prefixo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PrefixoJpaRepository extends JpaRepository<Prefixo, Long> {}

@@ -1,8 +1,8 @@
-package com.rotaslzapi.infrastructure.mariadb.controllers;
+package com.rotaslzapi.controllers;
 
-import com.rotaslzapi.infrastructure.mariadb.entities.Localidade;
+import com.rotaslzapi.entities.Localidade;
 import com.rotaslzapi.requests.CriarLocalidadeRequest;
-import com.rotaslzapi.infrastructure.mariadb.services.LocalidadeService;
+import com.rotaslzapi.services.LocalidadeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/mariadb/localidade")
+@RequestMapping("/localidade")
 @RequiredArgsConstructor
 public class LocalidadeController {
 

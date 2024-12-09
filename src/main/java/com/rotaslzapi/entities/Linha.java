@@ -1,6 +1,5 @@
-package com.rotaslzapi.infrastructure.mariadb.entities;
+package com.rotaslzapi.entities;
 
-import com.rotaslzapi.enums.Sentido;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -9,28 +8,27 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "localidade")
+@Table(name = "linha")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Localidade {
+public class Linha {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "sentido", nullable = false)
+    @Column(name = "numero", nullable = false)
     @NotNull
-    private Sentido sentido;
+    private String numero;
 
     @Column(name = "descricao", nullable = false)
     @NotNull
     private String descricao;
 
     @ManyToOne
-    @JoinColumn(name = "tipo_localidade_id")
-    private TipoLocalidade tipoLocalidade;
+    @JoinColumn(name = "prefixo_id")
+    private Prefixo prefixo;
 
 }
