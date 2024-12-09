@@ -1,4 +1,4 @@
-package com.rotaslzapi.models;
+package com.rotaslzapi.infrastructure.mariadb.entities;
 
 import com.rotaslzapi.enums.Sentido;
 import jakarta.persistence.*;

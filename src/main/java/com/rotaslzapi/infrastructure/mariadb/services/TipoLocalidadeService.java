@@ -1,7 +1,7 @@
-package com.rotaslzapi.services;
+package com.rotaslzapi.infrastructure.mariadb.services;
 
-import com.rotaslzapi.models.TipoLocalidade;
-import com.rotaslzapi.repositories.TipoLocalidadeJpaRepository;
+import com.rotaslzapi.infrastructure.mariadb.entities.TipoLocalidade;
+import com.rotaslzapi.infrastructure.mariadb.repositories.TipoLocalidadeJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

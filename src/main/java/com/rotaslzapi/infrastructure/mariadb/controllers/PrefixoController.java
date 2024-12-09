@@ -1,7 +1,7 @@
-package com.rotaslzapi.controllers;
+package com.rotaslzapi.infrastructure.mariadb.controllers;
 
-import com.rotaslzapi.models.Prefixo;
-import com.rotaslzapi.services.PrefixoService;
+import com.rotaslzapi.infrastructure.mariadb.entities.Prefixo;
+import com.rotaslzapi.infrastructure.mariadb.services.PrefixoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/prefixo")
+@RequestMapping("/mariadb/prefixo")
 @RequiredArgsConstructor
 public class PrefixoController {
 

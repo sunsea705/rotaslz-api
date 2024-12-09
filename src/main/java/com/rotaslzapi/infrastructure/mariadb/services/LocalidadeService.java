@@ -1,8 +1,8 @@
-package com.rotaslzapi.services;
+package com.rotaslzapi.infrastructure.mariadb.services;
 
-import com.rotaslzapi.models.Localidade;
-import com.rotaslzapi.models.TipoLocalidade;
-import com.rotaslzapi.repositories.LocalidadeJpaRepository;
+import com.rotaslzapi.infrastructure.mariadb.entities.Localidade;
+import com.rotaslzapi.infrastructure.mariadb.entities.TipoLocalidade;
+import com.rotaslzapi.infrastructure.mariadb.repositories.LocalidadeJpaRepository;
 import com.rotaslzapi.requests.CriarLocalidadeRequest;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.rotaslzapi.models;
+package com.rotaslzapi.infrastructure.mariadb.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

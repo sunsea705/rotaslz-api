@@ -1,7 +1,7 @@
-package com.rotaslzapi.services;
+package com.rotaslzapi.infrastructure.mariadb.services;
 
-import com.rotaslzapi.models.Prefixo;
-import com.rotaslzapi.repositories.PrefixoJpaRepository;
+import com.rotaslzapi.infrastructure.mariadb.entities.Prefixo;
+import com.rotaslzapi.infrastructure.mariadb.repositories.PrefixoJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

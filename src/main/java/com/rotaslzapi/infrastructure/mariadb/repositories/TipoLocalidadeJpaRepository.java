@@ -1,6 +1,6 @@
-package com.rotaslzapi.repositories;
+package com.rotaslzapi.infrastructure.mariadb.repositories;
 
-import com.rotaslzapi.models.TipoLocalidade;
+import com.rotaslzapi.infrastructure.mariadb.entities.TipoLocalidade;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TipoLocalidadeJpaRepository extends JpaRepository<TipoLocalidade, Long> {
