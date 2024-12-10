@@ -33,4 +33,10 @@ public class Localidade {
     @JoinColumn(name = "tipo_localidade_id")
     private TipoLocalidade tipoLocalidade;
 
+    public void editarInstancia(Sentido sentido, String descricao, TipoLocalidade tipoLocalidade) {
+        this.sentido = sentido != null ? sentido : this.sentido;
+        this.descricao = descricao != null ? descricao : this.descricao;
+        this.tipoLocalidade = tipoLocalidade != null ? tipoLocalidade : this.tipoLocalidade;
+    }
+
 }
