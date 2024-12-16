@@ -1,4 +1,4 @@
-package com.rotaslzapi.requests;
+package com.rotaslzapi.requests.linha;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

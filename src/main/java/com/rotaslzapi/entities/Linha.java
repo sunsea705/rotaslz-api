@@ -19,7 +19,7 @@ public class Linha {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "numero", nullable = false)
+    @Column(name = "numero", nullable = false, unique = true)
     @NotNull
     private String numero;
 
@@ -30,5 +30,11 @@ public class Linha {
     @ManyToOne
     @JoinColumn(name = "prefixo_id")
     private Prefixo prefixo;
+
+    public void atualizarInstancia(String numero, String descricao, Prefixo prefixo) {
+        this.numero = numero != null ? numero : this.numero;
+        this.descricao = descricao != null ? descricao : this.descricao;
+        this.prefixo = prefixo != null ? prefixo : this.prefixo;
+    }
 
 }

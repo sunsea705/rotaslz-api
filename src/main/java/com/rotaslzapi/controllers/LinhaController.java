@@ -1,7 +1,8 @@
 package com.rotaslzapi.controllers;
 
 import com.rotaslzapi.entities.Linha;
-import com.rotaslzapi.requests.CriarLinhaRequest;
+import com.rotaslzapi.requests.linha.AtualizarLinhaRequest;
+import com.rotaslzapi.requests.linha.CriarLinhaRequest;
 import com.rotaslzapi.services.LinhaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,5 +27,17 @@ public class LinhaController {
     public ResponseEntity<Linha> criarLinha(@Valid @RequestBody CriarLinhaRequest criarLinhaRequest){
         return ResponseEntity.ok(linhaService.criarLinha(criarLinhaRequest));
     }
+
+    @PutMapping
+    public ResponseEntity<Linha> atualizarLinha(@Valid @RequestBody AtualizarLinhaRequest atualizarLinhaRequest){
+        return ResponseEntity.ok(linhaService.atualizarLinha(atualizarLinhaRequest));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletarLinha(@PathVariable Long id){
+        linhaService.deletarLinha(id);
+        return ResponseEntity.ok("Linha de ID " + id + " deletada com sucesso!");
+    }
+
 
 }

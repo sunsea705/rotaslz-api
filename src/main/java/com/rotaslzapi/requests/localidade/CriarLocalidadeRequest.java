@@ -1,4 +1,4 @@
-package com.rotaslzapi.requests;
+package com.rotaslzapi.requests.localidade;
 
 import com.rotaslzapi.config.validations.EnumValidator;
 import com.rotaslzapi.enums.Sentido;

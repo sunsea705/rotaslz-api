@@ -1,8 +1,8 @@
 package com.rotaslzapi.controllers;
 
 import com.rotaslzapi.entities.Localidade;
-import com.rotaslzapi.requests.CriarLocalidadeRequest;
-import com.rotaslzapi.requests.EditarLocalidadeRequest;
+import com.rotaslzapi.requests.localidade.CriarLocalidadeRequest;
+import com.rotaslzapi.requests.localidade.AtualizarLocalidadeRequest;
 import com.rotaslzapi.services.LocalidadeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,9 +29,9 @@ public class LocalidadeController {
     }
 
     @PutMapping
-    public ResponseEntity<Localidade> editarLocalidade(@Valid @RequestBody EditarLocalidadeRequest editarLocalidadeRequest) {
-        System.out.println("editarLocalidadeRequest = " + editarLocalidadeRequest);
-        return ResponseEntity.ok(localidadeService.editarLocalidade(editarLocalidadeRequest));
+    public ResponseEntity<Localidade> atualizarLocalidade(@Valid @RequestBody AtualizarLocalidadeRequest atualizarLocalidadeRequest) {
+        System.out.println("atualizarLocalidadeRequest = " + atualizarLocalidadeRequest);
+        return ResponseEntity.ok(localidadeService.atualizarLocalidade(atualizarLocalidadeRequest));
     }
 
     @DeleteMapping("/{id}")
