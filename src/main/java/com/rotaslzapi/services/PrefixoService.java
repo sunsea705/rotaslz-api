@@ -2,11 +2,11 @@ package com.rotaslzapi.services;
 
 import com.rotaslzapi.entities.Prefixo;
 import com.rotaslzapi.repositories.PrefixoJpaRepository;
+import com.rotaslzapi.utils.OperacoesSimplesJpa;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +18,8 @@ public class PrefixoService {
         return prefixoJpaRepository.findAll();
     }
 
-    public Optional<Prefixo> buscarPorId(Long id){ return prefixoJpaRepository.findById(id); }
+    public Prefixo buscarPorId(Long id){
+        return OperacoesSimplesJpa.buscarPorId(id, prefixoJpaRepository, "Prefixo");
+    }
 
 }

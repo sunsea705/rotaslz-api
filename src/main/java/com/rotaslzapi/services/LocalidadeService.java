@@ -3,10 +3,9 @@ package com.rotaslzapi.services;
 import com.rotaslzapi.entities.Localidade;
 import com.rotaslzapi.entities.TipoLocalidade;
 import com.rotaslzapi.repositories.LocalidadeJpaRepository;
-import com.rotaslzapi.requests.localidade.CriarLocalidadeRequest;
 import com.rotaslzapi.requests.localidade.AtualizarLocalidadeRequest;
+import com.rotaslzapi.requests.localidade.CriarLocalidadeRequest;
 import com.rotaslzapi.utils.OperacoesSimplesJpa;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,11 +24,13 @@ public class LocalidadeService {
         return localidadeJpaRepository.findAll();
     }
 
+    public Localidade buscarPorId(Long id) {
+        return OperacoesSimplesJpa.buscarPorId(id, localidadeJpaRepository, "Localidade");
+    }
+
     public Localidade criarLocalidade(CriarLocalidadeRequest criarLocalidadeRequest) {
 
-        TipoLocalidade tipoLocalidade = tipoLocalidadeService
-            .buscarPorId(criarLocalidadeRequest.tipoLocalidadeId())
-            .orElseThrow( () -> new EntityNotFoundException("Tipo Localidade de ID " + criarLocalidadeRequest.tipoLocalidadeId() + " não encontrado."));
+        TipoLocalidade tipoLocalidade = tipoLocalidadeService.buscarPorId(criarLocalidadeRequest.tipoLocalidadeId());
 
         Localidade localidade = Localidade.builder()
             .sentido(criarLocalidadeRequest.sentido())
@@ -42,13 +43,11 @@ public class LocalidadeService {
 
     public Localidade atualizarLocalidade(AtualizarLocalidadeRequest atualizarLocalidadeRequest) {
 
-        Localidade localidade = localidadeJpaRepository
-            .findById(atualizarLocalidadeRequest.localidadeId())
-            .orElseThrow( () -> new EntityNotFoundException("Localidade de ID " + atualizarLocalidadeRequest.localidadeId() + " não encontrada."));
+        Localidade localidade = buscarPorId(atualizarLocalidadeRequest.localidadeId());
 
-        TipoLocalidade tipoLocalidade = Optional.ofNullable(atualizarLocalidadeRequest.tipoLocalidadeId())
+        TipoLocalidade tipoLocalidade = Optional
+            .ofNullable(atualizarLocalidadeRequest.tipoLocalidadeId())
             .map(tipoLocalidadeService::buscarPorId)
-            .orElseThrow(() -> new EntityNotFoundException("Tipo Localidade de ID " + atualizarLocalidadeRequest.tipoLocalidadeId() + " não encontrado."))
             .orElse(null);
 
         localidade.atualizarInstancia(atualizarLocalidadeRequest.sentido(), atualizarLocalidadeRequest.descricao(), tipoLocalidade);

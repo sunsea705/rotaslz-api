@@ -25,11 +25,13 @@ public class LinhaService {
         return linhaJpaRepository.findAll();
     }
 
+    public Linha buscarPorId(Long id) {
+        return OperacoesSimplesJpa.buscarPorId(id, linhaJpaRepository, "Linha");
+    }
+
     public Linha criarLinha(CriarLinhaRequest criarLinhaRequest) {
 
-        Prefixo prefixo = prefixoService
-            .buscarPorId(criarLinhaRequest.prefixoId())
-            .orElseThrow( () -> new EntityNotFoundException("Prefixo de ID " + criarLinhaRequest.prefixoId() + " não encontrado."));
+        Prefixo prefixo = prefixoService.buscarPorId(criarLinhaRequest.prefixoId());
 
         Linha linha = Linha.builder()
             .descricao(criarLinhaRequest.descricao())
@@ -46,9 +48,9 @@ public class LinhaService {
             .findById(atualizarLinhaRequest.linhaId())
             .orElseThrow( () -> new EntityNotFoundException("Linha de ID " + atualizarLinhaRequest.linhaId() + " não encontrado."));
 
-        Prefixo prefixo = Optional.ofNullable(atualizarLinhaRequest.prefixoId())
+        Prefixo prefixo = Optional
+            .ofNullable(atualizarLinhaRequest.prefixoId())
             .map(prefixoService::buscarPorId)
-            .orElseThrow( () -> new EntityNotFoundException("Prefixo de ID " + atualizarLinhaRequest.prefixoId() + " não encontrado." ))
             .orElse(null);
 
         linha.atualizarInstancia(atualizarLinhaRequest.numero(), atualizarLinhaRequest.descricao(), prefixo);

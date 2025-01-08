@@ -1,6 +1,7 @@
 package com.rotaslzapi.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +31,8 @@ public class LinhaLocalidade {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Localidade localidade;
 
-    private int ordem;
+    @Column(name = "ordem", nullable = false)
+    @NotNull
+    private Integer ordem;
 
 }

@@ -2,11 +2,11 @@ package com.rotaslzapi.services;
 
 import com.rotaslzapi.entities.TipoLocalidade;
 import com.rotaslzapi.repositories.TipoLocalidadeJpaRepository;
+import com.rotaslzapi.utils.OperacoesSimplesJpa;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,8 +18,8 @@ public class TipoLocalidadeService {
         return tipoLocalidadeJpaRepository.findAll();
     }
 
-    public Optional<TipoLocalidade> buscarPorId(Long id) {
-        return tipoLocalidadeJpaRepository.findById(id);
+    public TipoLocalidade buscarPorId(Long id) {
+        return OperacoesSimplesJpa.buscarPorId(id, tipoLocalidadeJpaRepository, "Tipo Localidade");
     }
 
 }
