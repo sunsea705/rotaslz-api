@@ -37,4 +37,10 @@ public class Linha {
         this.prefixo = prefixo != null ? prefixo : this.prefixo;
     }
 
+    @Override
+    public String toString() {
+        String sigla = this.prefixo.getSigla() != null ? this.prefixo.getSigla() : "";
+        return sigla + this.numero + " - " + this.descricao;
+    }
+
 }

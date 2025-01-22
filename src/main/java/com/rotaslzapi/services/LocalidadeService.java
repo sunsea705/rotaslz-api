@@ -28,7 +28,7 @@ public class LocalidadeService {
         return OperacoesSimplesJpa.buscarPorId(id, localidadeJpaRepository, "Localidade");
     }
 
-    public Localidade criarLocalidade(CriarLocalidadeRequest criarLocalidadeRequest) {
+    public Localidade criar(CriarLocalidadeRequest criarLocalidadeRequest) {
 
         TipoLocalidade tipoLocalidade = tipoLocalidadeService.buscarPorId(criarLocalidadeRequest.tipoLocalidadeId());
 
@@ -41,7 +41,7 @@ public class LocalidadeService {
         return localidadeJpaRepository.save(localidade);
     }
 
-    public Localidade atualizarLocalidade(AtualizarLocalidadeRequest atualizarLocalidadeRequest) {
+    public Localidade atualizar(AtualizarLocalidadeRequest atualizarLocalidadeRequest) {
 
         Localidade localidade = buscarPorId(atualizarLocalidadeRequest.localidadeId());
 
@@ -56,7 +56,7 @@ public class LocalidadeService {
 
     }
 
-    public void deletarLocalidadePorId(Long localidadeId) {
+    public void deletarPorId(Long localidadeId) {
         OperacoesSimplesJpa.deletarSimplesPorId(localidadeId, localidadeJpaRepository, "Localidade");
     }
 

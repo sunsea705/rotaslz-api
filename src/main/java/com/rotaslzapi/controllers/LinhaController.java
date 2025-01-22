@@ -19,23 +19,23 @@ public class LinhaController {
     private final LinhaService linhaService;
 
     @GetMapping
-    public ResponseEntity<List<Linha>> listaLinhas() {
+    public ResponseEntity<List<Linha>> buscarTodos() {
         return ResponseEntity.ok(linhaService.buscarTodos());
     }
 
     @PostMapping
-    public ResponseEntity<Linha> criarLinha(@Valid @RequestBody CriarLinhaRequest criarLinhaRequest){
-        return ResponseEntity.ok(linhaService.criarLinha(criarLinhaRequest));
+    public ResponseEntity<Linha> criar(@Valid @RequestBody CriarLinhaRequest criarLinhaRequest){
+        return ResponseEntity.ok(linhaService.criar(criarLinhaRequest));
     }
 
     @PutMapping
-    public ResponseEntity<Linha> atualizarLinha(@Valid @RequestBody AtualizarLinhaRequest atualizarLinhaRequest){
-        return ResponseEntity.ok(linhaService.atualizarLinha(atualizarLinhaRequest));
+    public ResponseEntity<Linha> atualizar(@Valid @RequestBody AtualizarLinhaRequest atualizarLinhaRequest){
+        return ResponseEntity.ok(linhaService.atualizar(atualizarLinhaRequest));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletarLinha(@PathVariable Long id){
-        linhaService.deletarLinha(id);
+    public ResponseEntity<String> deletar(@PathVariable Long id){
+        linhaService.deletarPorId(id);
         return ResponseEntity.ok("Linha de ID " + id + " deletada com sucesso!");
     }
 

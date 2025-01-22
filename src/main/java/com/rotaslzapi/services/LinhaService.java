@@ -29,7 +29,7 @@ public class LinhaService {
         return OperacoesSimplesJpa.buscarPorId(id, linhaJpaRepository, "Linha");
     }
 
-    public Linha criarLinha(CriarLinhaRequest criarLinhaRequest) {
+    public Linha criar(CriarLinhaRequest criarLinhaRequest) {
 
         Prefixo prefixo = prefixoService.buscarPorId(criarLinhaRequest.prefixoId());
 
@@ -42,7 +42,7 @@ public class LinhaService {
         return linhaJpaRepository.save(linha);
     }
 
-    public Linha atualizarLinha(AtualizarLinhaRequest atualizarLinhaRequest) {
+    public Linha atualizar(AtualizarLinhaRequest atualizarLinhaRequest) {
 
         Linha linha = linhaJpaRepository
             .findById(atualizarLinhaRequest.linhaId())
@@ -58,7 +58,8 @@ public class LinhaService {
         return linhaJpaRepository.save(linha);
     }
 
-    public void deletarLinha(Long linhaId) {
+    public void deletarPorId(Long linhaId) {
         OperacoesSimplesJpa.deletarSimplesPorId(linhaId, linhaJpaRepository, "Linha");
     }
+
 }

@@ -4,7 +4,9 @@ import com.rotaslzapi.entities.Linha;
 import com.rotaslzapi.entities.LinhaLocalidade;
 import com.rotaslzapi.entities.Localidade;
 import com.rotaslzapi.repositories.LinhaLocalidadeJpaRepository;
+import com.rotaslzapi.requests.linhalocalidade.BuscarLinhaLocalidadeRequest;
 import com.rotaslzapi.requests.linhalocalidade.CriarLinhaLocalidadeRequest;
+import com.rotaslzapi.requests.linhalocalidade.EditarOrdemLinhaLocalidadeRequest;
 import com.rotaslzapi.utils.OperacoesSimplesJpa;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,11 @@ public class LinhaLocalidadeService {
         return OperacoesSimplesJpa.buscarPorId(id, linhaLocalidadeJpaRepository, "Linha Localidade");
     }
 
-    public LinhaLocalidade criarLinhaLocalidade(CriarLinhaLocalidadeRequest criarLinhaLocalidadeRequest) {
+    public List<LinhaLocalidade> buscarPorFiltro(BuscarLinhaLocalidadeRequest buscarLinhaLocalidadeRequest) {
+        return List.of();
+    }
+
+    public LinhaLocalidade criar(CriarLinhaLocalidadeRequest criarLinhaLocalidadeRequest) {
 
         if (criarLinhaLocalidadeRequest.ordem() <= 0) {
             throw new IllegalArgumentException("O ordem informada deve ser maior que zero!");
@@ -40,6 +46,7 @@ public class LinhaLocalidadeService {
             .linha(linha)
             .localidade(localidade)
             .ordem(criarLinhaLocalidadeRequest.ordem())
+            .descricao(linha + " / " + localidade.getDescricao())
             .build();
 
         linhaLocalidade = linhaLocalidadeJpaRepository.save(linhaLocalidade);
@@ -48,6 +55,28 @@ public class LinhaLocalidadeService {
 
         return linhaLocalidade;
 
+    }
+
+    public void editarOrdem(EditarOrdemLinhaLocalidadeRequest editarOrdemLinhaLocalidadeRequest) {
+
+        if (editarOrdemLinhaLocalidadeRequest.ordem() <= 0) {
+            throw new IllegalArgumentException("A ordem informada deve ser maior que zero!");
+        }
+
+        LinhaLocalidade linhaLocalidade = OperacoesSimplesJpa.buscarPorId(editarOrdemLinhaLocalidadeRequest.linhaLocalidadeId(), linhaLocalidadeJpaRepository, "Linha Localidade");
+
+        validarOrdem(linhaLocalidade.getLinha().getId(), linhaLocalidade.getLocalidade().getId(), editarOrdemLinhaLocalidadeRequest.ordem());
+
+        linhaLocalidade.setOrdem(editarOrdemLinhaLocalidadeRequest.ordem());
+
+        linhaLocalidade = linhaLocalidadeJpaRepository.save(linhaLocalidade);
+
+        remanejarOrdens(linhaLocalidade.getLinha().getId(), linhaLocalidade.getLocalidade().getId(), linhaLocalidade.getOrdem());
+
+    }
+
+    public void deletarPorId(Long id) {
+        //
     }
 
     private void validarOrdem(Long linhaId, Long localidadeId, Integer ordem) {

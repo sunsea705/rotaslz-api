@@ -18,7 +18,7 @@ public class TipoLocalidadeController {
     private final TipoLocalidadeService tipoLocalidadeService;
 
     @GetMapping
-    public ResponseEntity<List<TipoLocalidade>> listarTodos() {
+    public ResponseEntity<List<TipoLocalidade>> buscarTodos() {
         return ResponseEntity.ok(tipoLocalidadeService.buscarTodos());
     }
 

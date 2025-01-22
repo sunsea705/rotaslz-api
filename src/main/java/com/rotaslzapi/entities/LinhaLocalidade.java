@@ -35,4 +35,6 @@ public class LinhaLocalidade {
     @NotNull
     private Integer ordem;
 
+    private String descricao;
+
 }
