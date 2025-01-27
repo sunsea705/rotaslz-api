@@ -1,4 +1,4 @@
-package com.rotaslzapi.repositories;
+package com.rotaslzapi.repositories.jpa;
 
 import com.rotaslzapi.entities.TipoLocalidade;
 import org.springframework.data.jpa.repository.JpaRepository;

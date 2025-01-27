@@ -2,7 +2,7 @@ package com.rotaslzapi.services;
 
 import com.rotaslzapi.entities.Linha;
 import com.rotaslzapi.entities.Prefixo;
-import com.rotaslzapi.repositories.LinhaJpaRepository;
+import com.rotaslzapi.repositories.jpa.LinhaJpaRepository;
 import com.rotaslzapi.requests.linha.CriarLinhaRequest;
 import com.rotaslzapi.requests.linha.AtualizarLinhaRequest;
 import com.rotaslzapi.utils.OperacoesSimplesJpa;

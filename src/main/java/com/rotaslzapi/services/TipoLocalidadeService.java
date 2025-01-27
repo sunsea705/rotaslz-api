@@ -1,7 +1,7 @@
 package com.rotaslzapi.services;
 
 import com.rotaslzapi.entities.TipoLocalidade;
-import com.rotaslzapi.repositories.TipoLocalidadeJpaRepository;
+import com.rotaslzapi.repositories.jpa.TipoLocalidadeJpaRepository;
 import com.rotaslzapi.utils.OperacoesSimplesJpa;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

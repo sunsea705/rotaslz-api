@@ -2,7 +2,7 @@ package com.rotaslzapi.services;
 
 import com.rotaslzapi.entities.Localidade;
 import com.rotaslzapi.entities.TipoLocalidade;
-import com.rotaslzapi.repositories.LocalidadeJpaRepository;
+import com.rotaslzapi.repositories.jpa.LocalidadeJpaRepository;
 import com.rotaslzapi.requests.localidade.AtualizarLocalidadeRequest;
 import com.rotaslzapi.requests.localidade.CriarLocalidadeRequest;
 import com.rotaslzapi.utils.OperacoesSimplesJpa;

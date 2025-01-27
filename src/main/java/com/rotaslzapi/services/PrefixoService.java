@@ -1,7 +1,7 @@
 package com.rotaslzapi.services;
 
 import com.rotaslzapi.entities.Prefixo;
-import com.rotaslzapi.repositories.PrefixoJpaRepository;
+import com.rotaslzapi.repositories.jpa.PrefixoJpaRepository;
 import com.rotaslzapi.utils.OperacoesSimplesJpa;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

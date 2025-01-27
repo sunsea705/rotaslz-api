@@ -3,7 +3,8 @@ package com.rotaslzapi.services;
 import com.rotaslzapi.entities.Linha;
 import com.rotaslzapi.entities.LinhaLocalidade;
 import com.rotaslzapi.entities.Localidade;
-import com.rotaslzapi.repositories.LinhaLocalidadeJpaRepository;
+import com.rotaslzapi.repositories.custom.linhalocalidade.LinhaLocalidadeCustomRepository;
+import com.rotaslzapi.repositories.jpa.LinhaLocalidadeJpaRepository;
 import com.rotaslzapi.requests.linhalocalidade.BuscarLinhaLocalidadeRequest;
 import com.rotaslzapi.requests.linhalocalidade.CriarLinhaLocalidadeRequest;
 import com.rotaslzapi.requests.linhalocalidade.EditarOrdemLinhaLocalidadeRequest;
@@ -19,6 +20,7 @@ import java.util.List;
 public class LinhaLocalidadeService {
 
     private final LinhaLocalidadeJpaRepository linhaLocalidadeJpaRepository;
+    private final LinhaLocalidadeCustomRepository linhaLocalidadeCustomRepository;
     private final LinhaService linhaService;
     private final LocalidadeService localidadeService;
 
@@ -27,7 +29,7 @@ public class LinhaLocalidadeService {
     }
 
     public List<LinhaLocalidade> buscarPorFiltro(BuscarLinhaLocalidadeRequest buscarLinhaLocalidadeRequest) {
-        return List.of();
+        return linhaLocalidadeCustomRepository.buscarPorFiltro(buscarLinhaLocalidadeRequest);
     }
 
     public LinhaLocalidade criar(CriarLinhaLocalidadeRequest criarLinhaLocalidadeRequest) {
@@ -51,7 +53,7 @@ public class LinhaLocalidadeService {
 
         linhaLocalidade = linhaLocalidadeJpaRepository.save(linhaLocalidade);
 
-        remanejarOrdens(linha.getId(), localidade.getId(), linhaLocalidade.getOrdem());
+        remanejarOrdens(linha.getId(), localidade.getId(), linhaLocalidade.getOrdem(), true);
 
         return linhaLocalidade;
 
@@ -71,12 +73,14 @@ public class LinhaLocalidadeService {
 
         linhaLocalidade = linhaLocalidadeJpaRepository.save(linhaLocalidade);
 
-        remanejarOrdens(linhaLocalidade.getLinha().getId(), linhaLocalidade.getLocalidade().getId(), linhaLocalidade.getOrdem());
+        remanejarOrdens(linhaLocalidade.getLinha().getId(), linhaLocalidade.getLocalidade().getId(), linhaLocalidade.getOrdem(), true);
 
     }
 
     public void deletarPorId(Long id) {
-        //
+        LinhaLocalidade linhaLocalidade = OperacoesSimplesJpa.buscarPorId(id, linhaLocalidadeJpaRepository, "Linha Localidade");
+        OperacoesSimplesJpa.deletarSimplesPorId(id, linhaLocalidadeJpaRepository, "Linha Localidade");
+        remanejarOrdens(linhaLocalidade.getLinha().getId(), linhaLocalidade.getLocalidade().getId(), linhaLocalidade.getOrdem(), false);
     }
 
     private void validarOrdem(Long linhaId, Long localidadeId, Integer ordem) {
@@ -106,20 +110,30 @@ public class LinhaLocalidadeService {
         linhaLocalidadeJpaRepository.save(linhaLocalidade);
     }
 
-    private void remanejarOrdens(Long linhaId, Long localidadeId, Integer ordem) {
+    private void remanejarOrdens(Long linhaId, Long localidadeId, Integer ordem, boolean isAdicionar) {
 
         List<LinhaLocalidade> linhaLocalidades = new ArrayList<>();
 
         linhaLocalidadeJpaRepository.findByLinhaIdAndLocalidadeIdOrderByOrdemDesc(linhaId, localidadeId)
             .forEach(linhaLocalidade -> {
-                if (linhaLocalidade.getOrdem() >= ordem) {
-                    linhaLocalidades.add(linhaLocalidade);
+                if (isAdicionar) {
+                    if (linhaLocalidade.getOrdem() >= ordem) {
+                        linhaLocalidades.add(linhaLocalidade);
+                    }
                 }
+                else {
+                    if (linhaLocalidade.getOrdem() > ordem) {
+                        linhaLocalidades.add(linhaLocalidade);
+                    }
+                }
+
             }
         );
 
         for (LinhaLocalidade linhaLocalidade : linhaLocalidades) {
-            editarOrdem(linhaLocalidade.getId(), linhaLocalidade.getOrdem() + 1);
+            editarOrdem(linhaLocalidade.getId(),
+                isAdicionar ? (linhaLocalidade.getOrdem() + 1) : (linhaLocalidade.getOrdem() - 1)
+            );
         }
 
     }

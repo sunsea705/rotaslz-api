@@ -2,16 +2,16 @@ package com.rotaslzapi.controllers;
 
 
 import com.rotaslzapi.entities.LinhaLocalidade;
+import com.rotaslzapi.requests.linhalocalidade.BuscarLinhaLocalidadeRequest;
 import com.rotaslzapi.requests.linhalocalidade.CriarLinhaLocalidadeRequest;
 import com.rotaslzapi.requests.linhalocalidade.EditarOrdemLinhaLocalidadeRequest;
 import com.rotaslzapi.services.LinhaLocalidadeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/linha-localidade")
@@ -31,6 +31,13 @@ public class LinhaLocalidadeController {
     public ResponseEntity<String> editarOrdem(@Valid @RequestBody EditarOrdemLinhaLocalidadeRequest editarOrdemLinhaLocalidadeRequest) {
         linhaLocalidadeService.editarOrdem(editarOrdemLinhaLocalidadeRequest);
         return ResponseEntity.ok("Ordem da LinhaLocalidade de ID " + editarOrdemLinhaLocalidadeRequest.linhaLocalidadeId() + " atualizada com sucesso!");
+    }
+
+    @GetMapping("/buscar-por-filtro")
+    public ResponseEntity<List<LinhaLocalidade>> buscarPorFiltro(@Valid @RequestBody BuscarLinhaLocalidadeRequest buscarLinhaLocalidadeRequest) {
+        return ResponseEntity.ok(
+            linhaLocalidadeService.buscarPorFiltro(buscarLinhaLocalidadeRequest)
+        );
     }
 
 }
