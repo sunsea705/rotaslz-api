@@ -40,6 +40,12 @@ public class LinhaLocalidadeController {
         );
     }
 
+    @DeleteMapping("/deletar-por-id/{id}")
+    public ResponseEntity<String> deletarPorId(@PathVariable Long id) {
+        linhaLocalidadeService.deletarPorId(id);
+        return ResponseEntity.ok("Linha Localidade de ID: " + " deletada com sucesso!");
+    }
+
 }
 
 

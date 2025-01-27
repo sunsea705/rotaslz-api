@@ -80,7 +80,11 @@ public class LinhaLocalidadeService {
     public void deletarPorId(Long id) {
         LinhaLocalidade linhaLocalidade = OperacoesSimplesJpa.buscarPorId(id, linhaLocalidadeJpaRepository, "Linha Localidade");
         OperacoesSimplesJpa.deletarSimplesPorId(id, linhaLocalidadeJpaRepository, "Linha Localidade");
-        remanejarOrdens(linhaLocalidade.getLinha().getId(), linhaLocalidade.getLocalidade().getId(), linhaLocalidade.getOrdem(), false);
+
+        if (!buscarPorFiltro(new BuscarLinhaLocalidadeRequest(null, null)).isEmpty()) {
+            remanejarOrdens(linhaLocalidade.getLinha().getId(), linhaLocalidade.getLocalidade().getId(), linhaLocalidade.getOrdem(), false);
+        }
+
     }
 
     private void validarOrdem(Long linhaId, Long localidadeId, Integer ordem) {
